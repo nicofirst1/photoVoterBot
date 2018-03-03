@@ -105,13 +105,14 @@ disp.add_handler(CallbackQueryHandler(dis_like, pattern="/vote"))
 
 PORT = int(os.environ.get('PORT', '5000'))
 
-# updater.start_webhook(listen="0.0.0.0",
-#                               port=PORT,
-#                               url_path="main")
-# updater.bot.set_webhook("https://fancazzistibot.herokuapp.com/main")
+updater.start_webhook(listen="0.0.0.0",
+                              port=PORT,
+                              url_path="main")
+updater.bot.set_webhook("https://photovoterbot.herokuapp.com/main.py")
 
+updater.idle()
 
 print("polling")
 
-updater.start_polling()
+#updater.start_polling()
 

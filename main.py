@@ -133,7 +133,7 @@ def update_image_votes(bot, update,file_id,yes_num,no_num):
         bot.editMessageReplyMarkup(channel_id,
                                message_id=update.callback_query.message.message_id,
                                reply_markup=inline)
-    except telegram.error.BadRequest:
+    except (telegram.error.BadRequest,telegram.error.TimedOut):
         pass
 
 

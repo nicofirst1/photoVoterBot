@@ -1,7 +1,7 @@
 import os
 from urllib import parse
 import telegram
-from telegram.ext import Updater, MessageHandler, Filters, CallbackQueryHandler
+from telegram.ext import Updater, MessageHandler, Filters, CallbackQueryHandler, CommandHandler
 from telegram.inline.inlinekeyboardbutton import InlineKeyboardButton
 from telegram.inline.inlinekeyboardmarkup import InlineKeyboardMarkup
 import  logging
@@ -166,6 +166,8 @@ def connect_db():
     except Exception:
         return None
 
+def start_help(bot,update):
+    update.message.reply_text("Inviami una foto per farla apparire sul canale "+channel_id)
 
 def execute(query, param=None):
     cursor = connect_db()
@@ -196,6 +198,8 @@ def delete_all():
 if __name__ == '__main__':
 
     disp.add_handler(MessageHandler(Filters.photo, photo_reciever))
+    disp.add_handler(CommandHandler("help",start_help))
+    disp.add_handler(CommandHandler("start",start_help))
     disp.add_handler(CallbackQueryHandler(dis_like, pattern="/vote"))
 
     PORT = int(os.environ.get('PORT', '5000'))
